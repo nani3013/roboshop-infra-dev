@@ -55,7 +55,7 @@ module "records" {
   zone_name = var.zone_name #daws81s.online
   records = [
     {
-      name    = "expense-${var.environment}" 
+      name    = "roboshop-${var.environment}" 
       type    = "A"
       alias   = {
         name    = module.ingress_alb.dns_name
@@ -66,7 +66,7 @@ module "records" {
   ]
 }
 
-resource "aws_lb_target_group" "expense" {
+resource "aws_lb_target_group" "roboshop" {
   name     = local.resource_name
   port     = 80
   protocol = "HTTP"
@@ -96,7 +96,7 @@ resource "aws_lb_listener_rule" "frontend" {
 
   condition {
     host_header {
-      values = ["expense-${var.environment}.${var.zone_name}"] #expense-dev.nani30.online
+      values = ["roboshop-${var.environment}.${var.zone_name}"] # roboshop-dev.nani30.online
     }
   }
 }
